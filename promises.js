@@ -4,7 +4,6 @@ const fs = require('fs');
 const mdLinkExtractor = require('markdown-link-extractor');
 const linkCheck = require('link-check');
 
-
 const userPath = process.argv[2];
 
 const pathValidation = (route) => {
@@ -34,10 +33,7 @@ fs.readFile(userPath, 'UTF-8', (error, file) => {
         reject(error);
         throw error;
     }
-    console.log(mdLinkExtractor(file))
-    const { links } = mdLinkExtractor(file);
-    // links.forEach(link => console.log(link));
-
+    
 //     links.forEach(link => 
 //         linkCheck(link, function (err, result) {
 //             if (err) {
@@ -49,17 +45,26 @@ fs.readFile(userPath, 'UTF-8', (error, file) => {
 
 //         })
 // );
-    //luego ya no estará el console.log si no allí debe ir nuestra función de validar los links
 
     resolve(file);
-    // resolve({content:file, path:userPath});
-    // console.log(resolve({content:file, path:userPath}));
+
 });
 console.log('Este es el contenido del archivo....');
     })
     }
-    readNewFile(userPath).then(()=> {
-        console.log('Se esta leyendo la funcion')
+    readNewFile(userPath).then((file)=> {
+        const { links } = mdLinkExtractor(file, extended = true);
+        const basicInfoLinks = {};
+
+    links.forEach((link) => {
+
+      basicInfoLinks.href = link.href;
+      basicInfoLinks.text = link.text;
+      basicInfoLinks.file = userPath;
+        console.log(basicInfoLinks.file, basicInfoLinks.href, basicInfoLinks.text);
+        // console.log(basicInfoLinks);
+        // console.log('Soy el console de links', links);
+    })    
     });
 
     // C:\Users\57318\Development\Laboratoria\BOG004-md-links\testFile.md

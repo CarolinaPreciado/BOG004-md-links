@@ -34,7 +34,7 @@ fs.readFile(userPath, 'UTF-8', (error, file) => {
         reject(error);
         throw error;
     }
-    // console.log(mdLinkExtractor(file))
+    console.log(mdLinkExtractor(file))
     const { links } = mdLinkExtractor(file);
     // links.forEach(link => console.log(link));
 

@@ -27,16 +27,16 @@ const identifyFile = (userPath) => {
 }
 identifyFile(userPath);
 
-// const readNewFile = (userPath) => {
-//     return new Promise ((resolve, reject) => {
-// fs.readFile(userPath, 'UTF-8', (error, file) => {
-//     if(error){
-//         reject(error);
-//         throw error;
-//     }
-//     // console.log(mdLinkExtractor(file))
-//     const { links } = mdLinkExtractor(file);
-//     // links.forEach(link => console.log(link));
+const readNewFile = (userPath) => {
+    return new Promise ((resolve, reject) => {
+fs.readFile(userPath, 'UTF-8', (error, file) => {
+    if(error){
+        reject(error);
+        throw error;
+    }
+    // console.log(mdLinkExtractor(file))
+    const { links } = mdLinkExtractor(file);
+    // links.forEach(link => console.log(link));
 
 //     links.forEach(link => 
 //         linkCheck(link, function (err, result) {
@@ -49,18 +49,18 @@ identifyFile(userPath);
 
 //         })
 // );
-//     //luego ya no estará el console.log si no allí debe ir nuestra función de validar los links
+    //luego ya no estará el console.log si no allí debe ir nuestra función de validar los links
 
-//     resolve(file);
-//     // resolve({content:file, path:userPath});
-//     // console.log(resolve({content:file, path:userPath}));
-// });
-// console.log('Este es el contenido del archivo....');
-//     })
-//     }
-//     readNewFile(userPath).then(()=> {
-//         console.log('Se esta leyendo la funcion')
-//     });
+    resolve(file);
+    // resolve({content:file, path:userPath});
+    // console.log(resolve({content:file, path:userPath}));
+});
+console.log('Este es el contenido del archivo....');
+    })
+    }
+    readNewFile(userPath).then(()=> {
+        console.log('Se esta leyendo la funcion')
+    });
 
-//     // C:\Users\57318\Development\Laboratoria\BOG004-md-links\testFile.md
+    // C:\Users\57318\Development\Laboratoria\BOG004-md-links\testFile.md
 

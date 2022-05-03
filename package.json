@@ -3,5 +3,9 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
+  },
+  "dependencies": {
+    "link-check": "^5.1.0",
+    "markdown-link-extractor": "^2.0.1"
   }
 }

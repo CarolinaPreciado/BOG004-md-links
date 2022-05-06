@@ -62,43 +62,43 @@ const validationStatusLink = (infoLinksArray) => {
     });
   });
 };
-// const mdLinks = (path, options) => {
-//   return new Promise((resolve, reject) => {
-//     const routeAbsolute = pathValidation(userPath);
-//     identifyFile(routeAbsolute);
-//     const basicInfoLinks = [];
-//     readNewFile(routeAbsolute)
-//       .then((file) => {
-//         const { links } = mdLinkExtractor(file, (extended = true));
-//         const arrayLinks = links.map((link) => {
-//           let basicInfoLink = {};
-//           basicInfoLink.file = userPath;
-//           basicInfoLink.href = link.href;
-//           basicInfoLink.text = link.text;
-//           basicInfoLinks.push(basicInfoLink);
-//           return basicInfoLink;
-//         });
-//         return basicInfoLinks;
-//       })
-//       .then((res) => {
-//         if (!options) {
-//           resolve(res);
-//         } else {
-//           resolve(
-//             Promise.all(res.map((element) => validationStatusLink(element)))
-//           );
-//         }
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//         reject("Hubo un problema con la ejecución de la función");
-//       });
-//   });
-// };
-// mdLinks(userPath)
-//   .then((res) => {
-//     console.log(res, "Se resolvio la promesa");
-//   })
-//   .catch((error) => {
-//     console.log(error, "No se resolvio la promesa");
-//   });
+const mdLinks = (path, options) => {
+  return new Promise((resolve, reject) => {
+    const routeAbsolute = pathValidation(userPath);
+    identifyFile(routeAbsolute);
+    const basicInfoLinks = [];
+    readNewFile(routeAbsolute)
+      .then((file) => {
+        const { links } = mdLinkExtractor(file, (extended = true));
+        const arrayLinks = links.map((link) => {
+          let basicInfoLink = {};
+          basicInfoLink.file = userPath;
+          basicInfoLink.href = link.href;
+          basicInfoLink.text = link.text;
+          basicInfoLinks.push(basicInfoLink);
+          return basicInfoLink;
+        });
+        return basicInfoLinks;
+      })
+      .then((res) => {
+        if (!options) {
+          resolve(res);
+        } else {
+          resolve(
+            Promise.all(res.map((element) => validationStatusLink(element)))
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        reject("Hubo un problema con la ejecución de la función");
+      });
+  });
+};
+mdLinks(userPath)
+  .then((res) => {
+    console.log(res, "Se resolvio la promesa");
+  })
+  .catch((error) => {
+    console.log(error, "No se resolvio la promesa");
+  });

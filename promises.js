@@ -51,7 +51,6 @@ const validationStatusLink = (infoLinksArray) => {
       } else {
         statusLinks = "fail";
       }
-      console.log(infoLinksArray, "Esto es info links array");
       resolve({
         file: infoLinksArray.file,
         href: infoLinksArray.href,
@@ -62,6 +61,11 @@ const validationStatusLink = (infoLinksArray) => {
     });
   });
 };
+const validate = process.argv[3];
+const isValidate = validate === "--validate" ? true : false;
+console.log(validate);
+console.log(isValidate);
+
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     const routeAbsolute = pathValidation(userPath);
@@ -81,7 +85,7 @@ const mdLinks = (path, options) => {
         return basicInfoLinks;
       })
       .then((res) => {
-        if (!options) {
+        if (options.validate !== true) {
           resolve(res);
         } else {
           resolve(
@@ -95,7 +99,7 @@ const mdLinks = (path, options) => {
       });
   });
 };
-mdLinks(userPath)
+mdLinks(userPath, { validate: isValidate })
   .then((res) => {
     console.log(res, "Se resolvio la promesa");
   })

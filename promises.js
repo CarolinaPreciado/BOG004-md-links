@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const mdLinkExtractor = require("markdown-link-extractor");
 const linkCheck = require("link-check");
+const { error } = require("console");
 
 //Esta constante guarda la ruta que se ingrese por consola
 const userPath = process.argv[2];
@@ -11,10 +12,10 @@ const pathValidation = (route) => {
   //newRoute convierte la ruta relativa en absoluta
   const newRoute = path.resolve(route).normalize();
   if (!path.isAbsolute(userPath)) {
-    console.log("La ruta se transformo en absoluta", newRoute);
+    // console.log("La ruta se transformo en absoluta", newRoute);
     return newRoute;
   } else {
-    console.log("La ruta es absoluta", userPath);
+    // console.log("La ruta es absoluta", userPath);
     return userPath;
   }
 };
@@ -36,46 +37,68 @@ const readNewFile = (userPath) => {
     });
   });
 };
-
-// const basicInfoLinks = [];
-// readNewFile(userPath).then((file) => {
-//   const { links } = mdLinkExtractor(file, (extended = true));
-
-//   links.forEach((link) => {
-//     const basicInfoLink = {};
-//     basicInfoLink.href = link.href;
-//     basicInfoLink.text = link.text;
-//     basicInfoLink.file = userPath;
-//     basicInfoLinks.push(basicInfoLink);
-//     // console.log(basicInfoLinks.file, basicInfoLinks.href, basicInfoLinks.text);
-//     // console.log(basicInfoLinks);
-//     // console.log('Soy el console de links', links);
-//   });
-//   console.log(basicInfoLinks);
-//   // Necesito retornar basicInfoLinks
-
-//   //   console.log(basicInfoLinks.file, basicInfoLinks.href, basicInfoLinks.text);
-// });
-
-// const buildBasicResponse = (basicInfo) => {
-//   basicInfo.forEach((link) => {
-//     console.log(link.file, link.href, link.text);
-//     // COMO SE PUEDO RETORNAR RESPUESTA FINAL? PARA LIBRERIA Y PARA COMANDO
+const validationStatusLink = (infoLinksArray) => {
+  return new Promise((resolve, reject) => {
+    const infoLinks = infoLinksArray.href;
+    linkCheck(infoLinks, (error, result) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      let statusLinks = "";
+      if (result.status === "alive") {
+        statusLinks = "ok";
+      } else {
+        statusLinks = "fail";
+      }
+      console.log(infoLinksArray, "Esto es info links array");
+      resolve({
+        file: infoLinksArray.file,
+        href: infoLinksArray.href,
+        statusCode: result.statusCode,
+        status: statusLinks,
+        text: infoLinksArray.text,
+      });
+    });
+  });
+};
+// const mdLinks = (path, options) => {
+//   return new Promise((resolve, reject) => {
+//     const routeAbsolute = pathValidation(userPath);
+//     identifyFile(routeAbsolute);
+//     const basicInfoLinks = [];
+//     readNewFile(routeAbsolute)
+//       .then((file) => {
+//         const { links } = mdLinkExtractor(file, (extended = true));
+//         const arrayLinks = links.map((link) => {
+//           let basicInfoLink = {};
+//           basicInfoLink.file = userPath;
+//           basicInfoLink.href = link.href;
+//           basicInfoLink.text = link.text;
+//           basicInfoLinks.push(basicInfoLink);
+//           return basicInfoLink;
+//         });
+//         return basicInfoLinks;
+//       })
+//       .then((res) => {
+//         if (!options) {
+//           resolve(res);
+//         } else {
+//           resolve(
+//             Promise.all(res.map((element) => validationStatusLink(element)))
+//           );
+//         }
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//         reject("Hubo un problema con la ejecución de la función");
+//       });
 //   });
 // };
-// buildBasicResponse(basicInfoLinks);
-// ("AQUI NECESITO METER COMO ARGUMENTO EL RETORNO DE READNEWFILE O SEA BASICINFOLINKS");
-// // );
-// // C:\Users\57318\Development\Laboratoria\BOG004-md-links\testFile.md
-
-// //     links.forEach(link =>
-// //         linkCheck(link, function (err, result) {
-// //             if (err) {
-// //                 console.error(err);
-// //                 return;
-// //             }
-// //             console.log(JSON.stringify(result, null, 4));
-// //             // console.log(result.statusCode);
-
-// //         })
-// // );
+// mdLinks(userPath)
+//   .then((res) => {
+//     console.log(res, "Se resolvio la promesa");
+//   })
+//   .catch((error) => {
+//     console.log(error, "No se resolvio la promesa");
+//   });

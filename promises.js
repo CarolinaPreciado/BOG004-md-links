@@ -9,23 +9,24 @@ const { error } = require("console");
 const userPath = process.argv[2];
 
 const pathValidation = (route) => {
-  //newRoute convierte la ruta relativa en absoluta
-  const newRoute = path.resolve(route).normalize();
+  //PathAbsolute convierte la ruta relativa en absoluta
+  const pathAbsolute = path.resolve(route).normalize();
   if (!path.isAbsolute(userPath)) {
-    // console.log("La ruta se transformo en absoluta", newRoute);
-    return newRoute;
+    // console.log("La ruta se transformo en absoluta", pathAbsolute);
+    return pathAbsolute;
   } else {
     // console.log("La ruta es absoluta", userPath);
     return userPath;
   }
 };
-//Identifica si el archivo es .md
+// identifyFile Identifica si el archivo que se esta leyendo es .md
 const identifyFile = (userPath) => {
   const isMd = path.extname(pathValidation(userPath)) === ".md";
   return isMd;
 };
+
 //Función para leer el archivo
-const readNewFile = (userPath) => {
+const read = (userPath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(userPath, "UTF-8", (error, file) => {
       if (error) {
@@ -39,43 +40,48 @@ const readNewFile = (userPath) => {
   });
 };
 
-//Función para crear el objeto con los datos y cambiar alive a ok y dead a fail
-const validationStatusLink = (infoLinksArray) => {
+// Función que permite validar el estado del link y retorna un objeto con href, text, file, status y statusCode
+const validateLink = (infoLinkObject) => {
   return new Promise((resolve, reject) => {
-    const infoLinks = infoLinksArray.href;
-    linkCheck(infoLinks, (error, result) => {
+    const infoLink = infoLinkObject.href;
+
+    linkCheck(infoLink, (error, result) => {
       if (error) {
         console.log(error);
+        reject("No se pueden leer las propiedades del link");
         return;
       }
       let statusLinks = "";
       if (result.status === "alive") {
-        statusLinks = "ok";
+        statusLinks = "Ok";
       } else {
-        statusLinks = "fail";
+        statusLinks = "Fail";
       }
       resolve({
-        file: infoLinksArray.file,
-        href: infoLinksArray.href,
+        file: infoLinkObject.file,
+        href: infoLinkObject.href,
         statusCode: result.statusCode,
         status: statusLinks,
-        text: infoLinksArray.text,
+        text: infoLinkObject.text,
       });
     });
   });
 };
-let statsReturn = {};
+
 const linkStats = (arrayObject) => {
   const total = arrayObject.length;
   const sizeLinks = arrayObject.map((e) => e.href);
   const uniqueLinks = new Set(sizeLinks);
   const unique = [...uniqueLinks].length;
-  statsReturn.total = total;
-  statsReturn.unique = unique;
-  return statsReturn;
+
+  return { total, unique };
+};
+const validateAndStats = (arrayObject, totalUnique) => {
+  let broken = arrayObject.filter((e) => e.status === "Fail").length;
+  // Los ... indican que pasa de {total: 82, unique: 77} a total: 82, unique: 77 -- Elimina el objeto y deja solo las propiedades
+  return { ...totalUnique, broken: broken };
 };
 
-// const optionsView = {};
 let validate = "";
 let stats = "";
 const thirdPosition = () => {
@@ -84,87 +90,60 @@ const thirdPosition = () => {
   } else if (process.argv[3] === "--stats") {
     stats = true;
   }
-  console.log(validate, "SOY VALIDATE");
-  console.log(stats, "SOY STATS");
-};
-
-const validateAndStats = () => {
   if (process.argv[4] === "--stats") {
     stats = true;
   }
-  console.log(
-    linkStats([
-      {
-        file: "./test.md",
-        href: "https://es.wikipedia.org/wiki/Markdown",
-        statusCode: 200,
-        status: "Ok",
-        text: "Markdown",
-      },
-      {
-        file: "./test.md",
-        href: "https://nodejs.org/",
-        statusCode: 200,
-        status: "Ok",
-        text: "Node.js",
-      },
-      {
-        file: "./test.md",
-        href: "https://user-image.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg",
-        statusCode: 500,
-        status: "Fail",
-        text: "md-links",
-      },
-      {
-        file: "./test.md",
-        href: "https://developers.google.com/v8/",
-        statusCode: 200,
-        status: "Ok",
-        text: "motor de JavaScript V8 de Chrome",
-      },
-    ]),
-    "soy info basica"
-  );
 };
-validateAndStats();
-
-// console.log(validate, isValidate);
-
-// const stats = process.argv[4];
-// const isStats = stats === '--stats' ? true : false;
-// console.log(stats, isStats);
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     //Ingresa path
     //Función para convertir la ruta en absoluta
-    const routeAbsolute = pathValidation(userPath);
+    const pathAbsolute = pathValidation(userPath);
     //Función que evalua si la ruta es un archivo .md
-    identifyFile(routeAbsolute);
+    identifyFile(pathAbsolute);
     //Función que lee el archivo y crea el objeto
     const basicInfoLinks = [];
-    readNewFile(routeAbsolute)
+    read(pathAbsolute)
       .then((file) => {
         //Se crea una constante para usar la libreria markdownLinkExtractor, para extraer los links
         const { links } = mdLinkExtractor(file, (extended = true));
         const arrayLinks = links.map((link) => {
-          let basicInfoLink = {};
-          basicInfoLink.file = userPath;
-          basicInfoLink.href = link.href;
-          basicInfoLink.text = link.text;
-          basicInfoLinks.push(basicInfoLink);
-          return basicInfoLink;
+          let objetResolve = {};
+          objetResolve.file = userPath;
+          objetResolve.href = link.href;
+          objetResolve.text = link.text;
+          basicInfoLinks.push(objetResolve);
+          return objetResolve;
         });
         return basicInfoLinks;
       })
       .then((res) => {
         if (validate !== true && stats !== true) {
-          resolve(res);
+          return res;
+        } else if (validate === true && stats === true) {
+          return Promise.all(res.map((element) => validateLink(element)));
         } else if (stats === true) {
-          resolve(linkStats(res));
+          return linkStats(res);
+        } else {
+          return Promise.all(res.map((e) => validateLink(e)));
+        }
+      })
+      .then((res) => {
+        if (validate !== true && stats !== true) {
+          resolve(res.map((e) => `${e.file} ${e.href} ${e.text}\n`).join(""));
+        } else if (validate === true && stats === true) {
+          resolve(validateAndStats(res, linkStats(res)));
+        } else if (stats === true) {
+          resolve(`Total: ${res.total}\nUnique: ${res.unique}`);
         } else {
           resolve(
-            Promise.all(res.map((element) => validationStatusLink(element)))
+            res
+              .map(
+                (e) =>
+                  `${e.file} ${e.href} ${e.statusCode} ${e.status} ${e.text}\n`
+              )
+              .join("")
           );
         }
       })
@@ -176,8 +155,10 @@ const mdLinks = (path, options) => {
 };
 mdLinks(userPath, thirdPosition())
   .then((res) => {
-    console.log(res, "Se resolvio la promesa");
+    // Se resolvio la promesa
+    console.log(res);
   })
   .catch((error) => {
-    console.log(error, "No se resolvio la promesa");
+    //    No se resolvio la promesa
+    console.log(error);
   });

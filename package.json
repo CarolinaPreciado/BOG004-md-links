@@ -7,5 +7,29 @@
   "dependencies": {
     "link-check": "^5.1.0",
     "markdown-link-extractor": "^2.0.1"
-  }
+  },
+  "description": "Libreria para evaluar archivos .md Identica si tiene links, su estado y estadisticas.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0"
+  },
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarolinaPreciado/BOG004-md-links.git"
+  },
+  "author": "Carolina Preciado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarolinaPreciado/BOG004-md-links/issues"
+  },
+  "homepage": "https://github.com/CarolinaPreciado/BOG004-md-links#readme"
 }

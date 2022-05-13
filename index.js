@@ -140,4 +140,4 @@ const mdLinks = (path, options) => {
       });
   });
 };
-module.exports = mdLinks;
+module.exports = { pathValidation, read, validateLink, mdLinks };

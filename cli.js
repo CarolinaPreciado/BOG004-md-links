@@ -1,4 +1,4 @@
-const mdLinks = require("./index.js");
+const {mdLinks} = require("./index.js");
 
 const thirdPosition = (options) => {
   let option;

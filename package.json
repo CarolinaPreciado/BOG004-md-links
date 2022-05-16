@@ -28,6 +28,9 @@
   },
   "author": "Carolina Preciado",
   "license": "ISC",
+  "bin": {
+    "mdLinks": "./cli.js"
+  },
   "bugs": {
     "url": "https://github.com/CarolinaPreciado/BOG004-md-links/issues"
   },

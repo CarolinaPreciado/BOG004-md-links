@@ -66,7 +66,7 @@ const validateLink = (infoLinkObject) => {
       });
     });
   });
-};
+}; 
 
 const linkStats = (arrayObject) => {
   const total = arrayObject.length;
@@ -82,7 +82,7 @@ const validateAndStats = (arrayObject, totalUnique) => {
   return { ...totalUnique, broken: broken };
 };
 
-const mdLinks = (path, options) => {
+const mdLinks = (userPath, options) => {
   return new Promise((resolve, reject) => {
     //Ingresa path
     //Función para convertir la ruta en absoluta

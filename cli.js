@@ -12,10 +12,12 @@ const thirdPosition = (options) => {
     option = {};
   }
   return option;
-};
+}; 
 
-mdLinks(process.argv[2], thirdPosition(process))
+mdLinks(path = process.argv[2], thirdPosition(process))
   .then((res) => {
     console.log(res);
   })
   .catch((err) => err, "Esto es un error  de mdlink");
+
+  module.exports = { mdLinks };

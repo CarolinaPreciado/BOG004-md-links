@@ -1,4 +1,4 @@
-const {mdLinks} = require("./index.js");
+const { mdLinks } = require("./index.js");
 
 const thirdPosition = (options) => {
   let option;
@@ -12,7 +12,7 @@ const thirdPosition = (options) => {
     option = {};
   }
   return option;
-}; 
+};
 
 mdLinks(path = process.argv[2], thirdPosition(process))
   .then((res) => {

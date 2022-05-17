@@ -70,7 +70,7 @@ describe('mdLinks', () => {
 
 describe('mdLinks', () => {
   it('mdLinks con validate', () => {
-    let resultExpect = './testTwo.md https://es.wikipedia.org/wiki/Markdown 200 ok Markdown\n' 
+    let resultExpect = './testTwo.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\n' 
     let path = './testTwo.md';
     return mdLinks(path, {validate:true})
     .then(respuesta => {
@@ -98,7 +98,7 @@ describe('mdLinks', () => {
     let path = './testTwo.md';
     return mdLinks(path, {validate:true, stats: true})
     .then(respuesta => {
-      expect(respuesta).toBe(resultExpect)
+      expect(respuesta).toEqual(resultExpect)
     })
     .catch((err) => console.log(err, 'mensaje de error'));
   })

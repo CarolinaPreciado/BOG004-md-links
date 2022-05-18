@@ -5,12 +5,10 @@ const mdLinkExtractor = require("markdown-link-extractor");
 const linkCheck = require("link-check");
 const { error } = require("console");
 
-//Esta constante guarda la ruta que se ingrese por consola
-const userPath = process.argv[2];
 
-const pathValidation = (route) => {
+const pathValidation = (userPath) => {
   //PathAbsolute convierte la ruta relativa en absoluta
-  const pathAbsolute = path.resolve(route).normalize();
+  const pathAbsolute = path.resolve(userPath).normalize();
   if (!path.isAbsolute(userPath)) {
     // console.log("La ruta se transformo en absoluta", pathAbsolute);
     return pathAbsolute;
@@ -118,7 +116,8 @@ const mdLinks = (userPath, options) => {
       })
       .then((res) => {
         if (options.validate !== true && options.stats !== true) {
-          resolve(res.map((e) => `${e.file} ${e.href} ${e.text}\n`).join(""));
+          resolve(res.map((e) => `${e.file} ${e.href
+} ${e.text}\n`).join(""));
         } else if (options.validate === true && options.stats === true) {
           resolve(validateAndStats(res, linkStats(res)));
         } else if (options.stats === true) {

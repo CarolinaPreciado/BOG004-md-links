@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { mdLinks } = require("./index.js");
 
 const thirdPosition = (options) => {
@@ -17,7 +19,8 @@ const thirdPosition = (options) => {
 mdLinks(path = process.argv[2], thirdPosition(process))
   .then((res) => {
     console.log(res);
+    return res;
   })
-  .catch((err) => err, "Esto es un error  de mdlink");
+  .catch((err) => console.log(err, "Esto es un error  de mdlink"));
 
-  module.exports = { mdLinks };
+  module.exports = { mdLinks, thirdPosition };

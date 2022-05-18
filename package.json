@@ -1,14 +1,15 @@
 {
-  "name": "md-links",
-  "version": "0.1.0",
+  "name": "carolina-preciado-md-links",
+  "version": "0.1.2",
   "engines": {
     "node": ">=14.x"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "link-check": "^5.1.0",
     "markdown-link-extractor": "^2.0.1"
   },
-  "description": "Libreria para evaluar archivos .md Identica si tiene links, su estado y estadisticas.",
+  "description": "mdLinks es una biblioteca para evaluar archivos .md Identica si tiene links, su estado y estadisticas.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -23,12 +24,25 @@
     "jest": "^28.1.0"
   },
   "scripts": {
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
+    "lint": "eslint --fix",
+    "build": "npm run lint && npm run test",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CarolinaPreciado/BOG004-md-links.git"
   },
+  "keywords": [
+    "markdown",
+    "statdistics",
+    "links",
+    "count",
+    "CLI",
+    "estadísticas",
+    "biblioteca",
+    "mdLinks"
+  ],
   "author": "Carolina Preciado",
   "license": "ISC",
   "bin": {

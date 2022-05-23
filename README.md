@@ -12,6 +12,8 @@
 
 ## 1. Preámbulo
 
+<p align="center"><img src="./gif/render1653263970170.gif"></p>
+
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
 ligero muy popular entre developers. Es usado en muchísimas plataformas que
 manejan texto plano (GitHub, foros, blogs, ...), y es muy común

@@ -12,8 +12,6 @@
 
 ## 1. Preámbulo
 
-<p align="center"><img src="./gif/render1653263970170.gif"></p>
-
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
 ligero muy popular entre developers. Es usado en muchísimas plataformas que
 manejan texto plano (GitHub, foros, blogs, ...), y es muy común
@@ -30,6 +28,8 @@ en formato `Markdown`, para verificar los links que contengan y reportar
 algunas estadísticas.
 
 ## 2. Resumen del proyecto
+
+<p align="center"><img src="./gif/render1653263970170.gif"></p>
 
 mdLinks es una biblioteca creada con JavaScript y Node.js, con la que es posible identificar si el archivo pasado a través de una ruta es .md, revisa si contiene enlaces, si la búsqueda anterior resulta positiva la misma permite validar el estado de los links y también tiene la posibilidad de retornar estadísticas básicas como: links totales, únicos y rotos.
 

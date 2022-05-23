@@ -1,0 +1,171 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: powershell.exe
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: C:\Users\57318\Development\Laboratoria\PruebaNode
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 132
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 15
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 1338
+    content: "\e[2J\e[m\e[HWindows PowerShell\r\nCopyright (C) Microsoft Corporation. Todos los derechos reservados.\r\n\r\nPrueba la nueva tecnología PowerShell multiplataforma https://aka.ms/pscore6\e]0;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\a\e[?25h"
+  - delay: 13
+    content: "\e[25l\e[6;1H\e[?25h"
+  - delay: 294
+    content: 'PS C:\Users\57318\Development\Laboratoria\PruebaNode> '
+  - delay: 8781
+    content: "\e[?25l"
+  - delay: 14
+    content: "\e[93mmdLinks\e[m prueba.md\e[?25h"
+  - delay: 1259
+    content: "\r\n"
+  - delay: 836
+    content: "\e[25lprueba.md https://es.wikipedia.org/wiki/Markdown Markdown\e[60X\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg md-links\r\nprueba.md https://nodejs.org/es/ Node.js\e[77X\r\nprueba.md https://www.youtube.com/ youtube\e[75X\r\nprueba.md https://www.youtub.com/ youtube\e[76X\e[13;1H\e[?25h"
+  - delay: 37
+    content: 'PS C:\Users\57318\Development\Laboratoria\PruebaNode> '
+  - delay: 8872
+    content: "\e[?25l"
+  - delay: 12
+    content: "\e[93mmdLinks\e[m prueba.md \e[90m--validate\e[?25h"
+  - delay: 3376
+    content: "\e[m\r\n"
+  - delay: 1518
+    content: "prueba.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\e[60X\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg 200 Ok md-links\r\nprueba.md https://nodejs.org/es/ 200 Ok Node.js\r\nprueba.md https://www.youtube.com/ 200 Ok youtube\r\nprueba.md https://www.youtub.com/ 0 Fail youtube\r\n\n"
+  - delay: 40
+    content: 'PS C:\Users\57318\Development\Laboratoria\PruebaNode> '
+  - delay: 10760
+    content: "\e[?25l"
+  - delay: 12
+    content: "\e[93mmdLinks\e[m prueba.md \e[90m--stats\e[?25h"
+  - delay: 1498
+    content: "\e[25l\e[m\e[Hprueba.md https://es.wikipedia.org/wiki/Markdown Markdown\e[K\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg md-links\e[K\r\nprueba.md https://nodejs.org/es/ Node.js\e[K\r\nprueba.md https://www.youtube.com/ youtube\e[K\r\nprueba.md https://www.youtub.com/ youtube\e[K\r\n\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m\e[K\r\nprueba.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\e[K\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg 200 Ok md-links        \r\nprueba.md https://nodejs.org/es/ 200 Ok Node.js\e[K\r\nprueba.md https://www.youtube.com/ 200 Ok youtube\e[K\r\nprueba.md https://www.youtub.com/ 0 Fail youtube\e[K\r\n\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--stats\e[m\e[K\r\n\e[K\e[79C\e[?25h"
+  - delay: 8
+    content: "\r"
+  - delay: 1995
+    content: "Total: 5\r\nUnique: 5\r\n"
+  - delay: 30
+    content: 'PS C:\Users\57318\Development\Laboratoria\PruebaNode> '
+  - delay: 8761
+    content: "\e[?25l"
+  - delay: 14
+    content: "\e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m \e[90m--stats\e[?25h"
+  - delay: 1762
+    content: "\e[25l\e[m\e[Hprueba.md https://www.youtube.com/ youtube\e[K\r\nprueba.md https://www.youtub.com/ youtube\e[K\r\n\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m\e[K\r\nprueba.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\e[K\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg 200 Ok md-links        \r\nprueba.md https://nodejs.org/es/ 200 Ok Node.js\e[K\r\nprueba.md https://www.youtube.com/ 200 Ok youtube\e[K\r\nprueba.md https://www.youtub.com/ 0 Fail youtube\e[K\r\n\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--stats\e[m\e[K\r\nTotal: 5\e[K\r\nUnique: 5\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m \e[90m--stats\e[m\e[K\r\n\e[K\e[90C\e[?25h"
+  - delay: 11
+    content: "\r"
+  - delay: 822
+    content: "{ total: \e[33m5\e[m, unique: \e[33m5\e[m, broken: \e[33m1\e[m }\r\n"
+  - delay: 49
+    content: 'PS C:\Users\57318\Development\Laboratoria\PruebaNode> '
+  - delay: 6377
+    content: "\e[?25l"
+  - delay: 19
+    content: "\e[92mexit\e[?25h"
+  - delay: 1102
+    content: "\e[25l\e[m\e[H\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m\e[K\r\nprueba.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\e[K\r\nprueba.md https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg 200 Ok md-links        \r\nprueba.md https://nodejs.org/es/ 200 Ok Node.js\e[K\r\nprueba.md https://www.youtube.com/ 200 Ok youtube\e[K\r\nprueba.md https://www.youtub.com/ 0 Fail youtube\e[K\r\n\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--stats\e[m\e[K\r\nTotal: 5\e[K\r\nUnique: 5\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[93mmdLinks\e[m prueba.md \e[90m--validate\e[m \e[90m--stats\e[m\e[K\r\n{ total: \e[33m5\e[m, unique: \e[33m5\e[m, broken: \e[33m1\e[m }\e[K\r\nPS C:\\Users\\57318\\Development\\Laboratoria\\PruebaNode> \e[92mexit\e[m\e[K\r\n\e[K\e[58C\e[?25h"
+  - delay: 13
+    content: "\r"

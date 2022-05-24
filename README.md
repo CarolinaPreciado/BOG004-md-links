@@ -1,3 +1,15 @@
+[![NPM version][npm-image]][npm-url]
+[![NPM donwoads][downloads-image]][npm-url]
+
+<!-- Images -->
+
+[npm-image]: https://badge.fury.io/js/carolina-preciado-md-links.svg
+[downloads-image]: https://img.shields.io/npm/dm/carolina-preciado-md-links
+
+<!-- URLs -->
+
+[npm-url]: https://www.npmjs.com/package/carolina-preciado-md-links
+
 # Markdown Links
 
 ## Índice
